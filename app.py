@@ -14,9 +14,16 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
-@app.route('/get_characters')
+@app.route('/getcharacters')
 def get_characters():
-    return render_template("characters.html", characters=mongo.db.characterInfo.find(), classes=mongo.db.classes.find(), races=mongo.db.races.find())
+    characters = list(mongo.db.characterInfo.find())
+    classes = list(mongo.db.classes.find())
+    races = list(mongo.db.races.find())
+    return render_template(
+        "characters.html",
+        characters=characters,
+        classes=classes,
+        races=races)
 
 
 @app.route('/addcharacter')
@@ -27,6 +34,44 @@ def add_character():
         'addcharacter.html',
         classes=classes,
         races=races)
+
+
+@app.route('/insertcharacter', methods=['POST'])
+def insert_character():
+    characterInfo = mongo.db.characterInfo
+    characterInfo.insert_one(request.form.to_dict())
+    return redirect(url_for('get_characters'))
+
+
+@app.route('/editcharacter/<character_id>')
+def edit_character(character_id):
+    character = mongo.db.characterInfo.find_one({"_id": ObjectId(character_id)})
+    return render_template('editcharacter.html',
+        character=character)
+
+
+@app.route('/updatecharacter/<character_id>', methods=['POST'])
+def update_character(character_id):
+    character = mongo.db.characterInfo
+    character.update({'_id': ObjectId(character_id)},
+    {
+        'firstName': request.form.get('firstName'),
+        'lastName': request.form.get('lastName'),
+        'strength': request.form.get('strength'),
+        'dexterity': request.form.get('dexterity'),
+        'constitution': request.form.get('constitution'),
+        'intelligence': request.form.get('intelligence'),
+        'wisdom': request.form.get('wisdom'),
+        'charisma': request.form.get('charisma'),
+        'is_dead': request.form.get('is_dead')
+    })
+    return redirect(url_for('get_characters'))
+
+
+@app.route('/delete_character/<character_id>')
+def delete_character(character_id):
+    mongo.db.characterInfo.remove({'_id': ObjectId(character_id)})
+    return redirect(url_for('get_characters'))
 
 
 if __name__ == '__main__':

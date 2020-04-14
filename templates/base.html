@@ -8,6 +8,22 @@
     <script src="https://kit.fontawesome.com/ee465c1a5d.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{{url_for('get_characters')}}" class="brand-logo"><img src="https://i.pinimg.com/originals/48/cb/53/48cb5349f515f6e59edc2a4de294f439.png" alt="dnd-logo"></a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="fas fa-bars"></i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{{url_for('get_characters')}}">Home</a></li>
+                <li><a href="{{url_for('add_character')}}">Create Character</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a href="{{url_for('get_characters')}}">Home</a></li>
+                <li><a href="{{url_for('add_character')}}">Create Character</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 <div class="container">
 {% block content %} {% endblock %}
 </div>

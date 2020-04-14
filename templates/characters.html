@@ -9,13 +9,19 @@
                 </div>
                 <div class="col s10">
                     <strong class="name">{{character.firstName}} {{character.lastName}}</strong>
+                    {% if character.is_dead == 'on' %}
+                    <i class="fas fa-skull-crossbones"></i>
+                    {% endif %}
                 </div>
                 <div class="col s1">
-                    <a href="" class="waves-effect waves-light btn btn_small"><i class="material-icons manage">edit</i></a>
-                    <a href="" class="waves-effect waves-light btn btn_small blue"><i class="material-icons manage">delete</i></a>
+                    <a href="{{ url_for('edit_character', character_id=character._id) }}" class="waves-effect waves-light btn btn_small"><i class="material-icons manage">edit</i></a>
+                    {% if character.is_dead == 'on' %}
+                    <a href="{{ url_for('delete_character', character_id=character._id) }}" class="waves-effect waves-light btn btn_small blue"><i class="material-icons manage">delete</i></a>
+                    {% endif %}
                 </div>
             </div>
-            <div class="collapsible-body">
+
+            <div class="collapsible-body opacity">
                 <div class="row">
                     <div class="col s2">
                         <strong>Stats</strong>
@@ -39,7 +45,48 @@
                         </div>
                     </div>
                     <div class="col s5">
-                        
+                        {% for class in classes %}
+                            {% if class.class_name == character.class_name %}
+                                <img class="class_image" src="{{ class.class_image }}" alt="{{ class.class_name }}">
+                                <h4 class="class_name">{{class.class_name }}</h4>
+                                <p class="description">{{ class.class_description }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col s5">
+                        {% for race in races %}
+                            {% if race.race_name == character.race_name %}
+                                <img class="race_image" src="{{ race.race_image }}" alt="{{ race.race_name }}">
+                                <h4 class="class_name">{{race.race_name }}</h4>
+                                <p>{{ race.race_description }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2">
+                        {% for class in classes %}
+                            {% if class.class_name == character.class_name %}
+                                <p class="description">
+                                    <strong>
+                                        Money
+                                    </strong>
+                                <div>{{ class.money }} gp</div>
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col s10">
+                    {% for class in classes %}
+                            {% if class.class_name == character.class_name %}
+                                <p class="description">
+                                    <strong>
+                                        Equipment
+                                    </strong>
+                                <div>{{ class.equipment }}</div>
+                                </p>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>               
             </div>

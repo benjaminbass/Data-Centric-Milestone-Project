@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block content %}
+<h3>Modify Character</h3>
+<div class="row">
+    <form action="{{ url_for('update_character', character_id=character._id) }}" method="POST" class="col s12">
+        <div class="row">
+            <div class="input-field col s5">
+                <input id="first_name" name="firstName" type="text" class="validate" value="{{ character.firstName }}">
+                <label for="icon_prefix">First Name</label>
+            </div>
+            <div class="input-field col s5 offset-s2">
+                <input id="last_name" name="lastName" type="text" class="validate" value="{{ character.lastName }}">
+                <label for="icon_prefix">Last Name</label>
+            </div>
+        </div>
+        <h4>Levels</h4>
+        <p>Certain events in game will alter your stats. Please record any updates made from here.</p>
+        <div class="row">
+            <div class="input-field col s1 levels">
+                <input id="strength" name="strength" type="text" value="{{ character.strength }}">
+                <label for="icon_prefix">STR</label>
+            </div>
+            <div class="input-field col s1 offset-s1 levels">
+                <input id="dexterity" name="dexterity" type="text" value="{{ character.dexterity }}">
+                <label for="icon_prefix">DEX</label>
+            </div>
+            <div class="input-field col s1 offset-s1 levels">
+                <input id="constitution" name="constitution" type="text" value="{{ character.constitution }}">
+                <label for="icon_prefix">CON</label>
+            </div>
+            <div class="input-field col s1 offset-s1 levels">
+                <input id="intelligence" name="intelligence" type="text" value="{{ character.intelligence }}">
+                <label for="icon_prefix">INT</label>
+            </div>
+            <div class="input-field col s1 offset-s1 levels">
+                <input id="wisdom" name="wisdom" type="text" value="{{ character.wisdom }}">
+                <label for="icon_prefix">WIS</label>
+            </div>
+            <div class="input-field col s1 offset-s1 levels">
+                <input id="charisma" name="charisma" type="text" value="{{ character.charisma }}">
+                <label for="icon_prefix">CHA</label>
+            </div>
+        </div>
+        <h4>Death</h4>
+        <p>If your character dies, you can record that here. Remember that your character can always be revived when inside of a battle, however if the battle has ended, this is <b><u>permanent</u></b>. You will then need to remove your character from the main character list</p>
+        <div class="row">
+            <div class="switch">
+                <label>
+                Alive
+                {% if character.is_dead %}
+                    <input id="is_dead" name="is_dead" type="checkbox" class="validate">
+                {% else %}
+                    <input id="is_dead" name="is_dead" type="checkbox" class="validate">
+                {% endif %}
+                  <span class="lever"></span>
+                  Dead
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Done
+            <i class="material-icons right">playlist_add</i>
+            </button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+{% endblock %}
