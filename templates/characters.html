@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+    <ul class="collapsible" data-collapsible="accordion">
+        {% for character in characters %}
+        <li>
+            <div class="collapsible-header row">
+                <div class="col s1">
+                    <i class="material-icons">expand_more</i>
+                </div>
+                <div class="col s10">
+                    <strong class="name">{{character.firstName}} {{character.lastName}}</strong>
+                </div>
+                <div class="col s1">
+                    <a href="" class="waves-effect waves-light btn btn_small"><i class="material-icons manage">edit</i></a>
+                    <a href="" class="waves-effect waves-light btn btn_small blue"><i class="material-icons manage">delete</i></a>
+                </div>
+            </div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <div class="col s2">
+                        <strong>Stats</strong>
+                        <div>
+                        Strength: {{character.strength}}
+                        </div>
+                        <div>
+                        Dexterity: {{character.dexterity}}
+                        </div>
+                        <div>
+                        Constitution: {{character.constitution}}
+                        </div>
+                        <div>
+                        Intelligence: {{character.intelligence}}
+                        </div>
+                        <div>
+                        Wisdom: {{character.wisdom}}
+                        </div>
+                        <div>
+                        Charisma: {{character.charisma}}
+                        </div>
+                    </div>
+                    <div class="col s5">
+                        
+                    </div>
+                </div>               
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
