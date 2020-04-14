@@ -15,10 +15,9 @@
         <div class="row">
             <div class="input-field col s5">
                 <select id="class" name="class_name">
-                <option value="" disabled selected>Choose Class</option>
                 {% for class in classes %}
                     {% if class.class_name == character.class_name}
-                    <option value="{{ class.class_name }}">{{ class.class_name }}</option>
+                    <option value="{{ class.class_name }}" disabled>{{ class.class_name }}</option>
                     {% endif %}
                 {% endfor %}
                 </select>
