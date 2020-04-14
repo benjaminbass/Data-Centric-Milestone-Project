@@ -12,6 +12,26 @@
                 <label for="icon_prefix">Last Name</label>
             </div>
         </div>
+        <div class="row">
+            <div class="input-field col s5">
+                <select id="class" name="class_name">
+                <option value="" disabled selected>Choose Class</option>
+                {% for class in classes %}
+                <option value="{{ class.class_name }}">{{ class.class_name }}</option>
+                {% endfor %}
+                </select>
+                <label>Choose a class</label>
+            </div>
+            <div class="input-field col s5 offset-s2">
+                <select id="race" name="race_name">
+                <option value="" disabled selected>Choose Race</option>
+                {% for race in races %}
+                <option value="{{ race.race_name }}">{{ race.race_name }}</option>
+                {% endfor %}
+                </select>
+                <label>Choose a race</label>
+            </div>
+        </div>
         <h4>Levels</h4>
         <p>Certain events in game will alter your stats. Please record any updates made from here.</p>
         <div class="row">

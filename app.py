@@ -45,9 +45,13 @@ def insert_character():
 
 @app.route('/editcharacter/<character_id>')
 def edit_character(character_id):
+    classes = list(mongo.db.classes.find())
+    races = list(mongo.db.races.find())
     character = mongo.db.characterInfo.find_one({"_id": ObjectId(character_id)})
     return render_template('editcharacter.html',
-        character=character)
+        character=character,
+        classes=classes,
+        races=races)
 
 
 @app.route('/updatecharacter/<character_id>', methods=['POST'])
@@ -63,7 +67,9 @@ def update_character(character_id):
         'intelligence': request.form.get('intelligence'),
         'wisdom': request.form.get('wisdom'),
         'charisma': request.form.get('charisma'),
-        'is_dead': request.form.get('is_dead')
+        'is_dead': request.form.get('is_dead'),
+        'race-name': request.form.get('race-name'),
+        'class-name': request.form.get('class-name')
     })
     return redirect(url_for('get_characters'))
 
