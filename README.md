@@ -22,6 +22,14 @@ Here you can find a list of available features from the Big Shmeck website.
 * View character records to see information presented on the web site
 * Remove character records when a character has died
 
+### Further Functionality #
+
+Further functionality I would like to add in the future includes but is not limited to:
+
+* Edit / remove classes
+* Edit / remove races
+* Pagination on Home
+
 ### Technologies Used #
 
 -  **HTML**
@@ -34,3 +42,4 @@ Here you can find a list of available features from the Big Shmeck website.
     - Python is an interpreted, high-level, general-purpose programming language.
 - **MongoDB**
     - MongoDB is a cross-platform document-oriented database program.
+
