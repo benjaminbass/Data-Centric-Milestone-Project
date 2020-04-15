@@ -45,20 +45,21 @@ def insert_character():
 
 @app.route('/editcharacter/<character_id>')
 def edit_character(character_id):
-    classes = list(mongo.db.classes.find())
-    races = list(mongo.db.races.find())
+    all_classes = mongo.db.classes.find()
+    all_races = mongo.db.races.find()
     character = mongo.db.characterInfo.find_one({"_id": ObjectId(character_id)})
     return render_template('editcharacter.html',
         character=character,
-        classes=classes,
-        races=races)
+        classes=all_classes,
+        races=all_races)
 
 
 @app.route('/updatecharacter/<character_id>', methods=['POST'])
 def update_character(character_id):
-    character = mongo.db.characterInfo
-    character.update({'_id': ObjectId(character_id)},
-    {
+    character = mongo.db.characterInfo.find_one({'_id': ObjectId(character_id)})
+    get_class = character.get('class_name')
+    get_race = character.get('race_name')
+    mongo.db.characterInfo.update({'_id': ObjectId(character_id)}, {
         'firstName': request.form.get('firstName'),
         'lastName': request.form.get('lastName'),
         'strength': request.form.get('strength'),
@@ -68,8 +69,8 @@ def update_character(character_id):
         'wisdom': request.form.get('wisdom'),
         'charisma': request.form.get('charisma'),
         'is_dead': request.form.get('is_dead'),
-        'race-name': request.form.get('race-name'),
-        'class-name': request.form.get('class-name')
+        'race_name': get_race,
+        'class_name': get_class
     })
     return redirect(url_for('get_characters'))
 
@@ -80,7 +81,19 @@ def delete_character(character_id):
     return redirect(url_for('get_characters'))
 
 
+@app.route('/about')
+def about():
+    characters = list(mongo.db.characterInfo.find())
+    classes = list(mongo.db.classes.find())
+    races = list(mongo.db.races.find())
+    return render_template(
+        "about.html",
+        characters=characters,
+        classes=classes,
+        races=races)
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
+            debug=False)

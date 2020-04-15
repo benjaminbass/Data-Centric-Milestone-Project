@@ -16,17 +16,40 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="{{url_for('get_characters')}}">Home</a></li>
                 <li><a href="{{url_for('add_character')}}">Create Character</a></li>
+                <li><a href="{{url_for('about')}}">About</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="{{url_for('get_characters')}}">Home</a></li>
                 <li><a href="{{url_for('add_character')}}">Create Character</a></li>
+                <li><a href="{{url_for('about')}}">About</a></li>
             </ul>
         </div>
     </nav>
 </header>
+
+<main>
 <div class="container">
 {% block content %} {% endblock %}
 </div>
+</main>
+
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+            <p>This site was created by Ben Bass (AKA Big Shmeck) / Please use the following links to access my public GitHub Repos and Artist page</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+            <h5>Links</h5>
+                <a href="https://github.com/Bendoo1?tab=repositories"><i class="fab fa-github-square"></i></a></li>
+                <a class="grey-text text-lighten-3" href="https://soundcloud.com/bigshmeck"><i class="fab fa-soundcloud"></i></a>
+                <div>
+                    For further information on D&D please use the following link: <a target="_blank" href="https://dnd.wizards.com/"><img class="brand-logo" src="https://i.pinimg.com/originals/48/cb/53/48cb5349f515f6e59edc2a4de294f439.png" alt="D&D"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
